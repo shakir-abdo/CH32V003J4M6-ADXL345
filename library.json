@@ -1,0 +1,21 @@
+{
+  "name": "ADXL345",
+  "version": "1.0.0",
+  "description": "ADXL345 accelerometer library for CH32V003j4m6",
+  "keywords": "accelerometer, adxl345, ch32v003, CH32V003j4m6",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shakir-abdo/CH32V003J4M6-ADXL345.git"
+  },
+  "authors": [
+    {
+      "name": "Shakir Abdo",
+      "email": "shicolare1@gmail.com",
+      "maintainer": true
+    }
+  ],
+  "license": "MIT",
+  "frameworks": "*",
+  "platforms": "*",
+  "headers": "adxl345.h"
+}
