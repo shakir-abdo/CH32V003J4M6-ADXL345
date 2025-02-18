@@ -30,15 +30,18 @@ int main() {
             int16_t z_int = (int16_t)(accel_data.z * 100);
 
             // Format and send X value
-            sprintf(buffer, "X: %d.%02d g\r\n", x_int/100, abs(x_int%100));
+            sprintf(buffer, "X: %s%d.%02d g\r\n", (x_int < 0 ? "-" : ""),
+                    abs(x_int) / 100, abs(x_int) % 100);
             UART_SendString(buffer);
 
             // Format and send Y value
-            sprintf(buffer, "Y: %d.%02d g\r\n", y_int/100, abs(y_int%100));
+            sprintf(buffer, "Y: %s%d.%02d g\r\n", (y_int < 0 ? "-" : ""),
+                    abs(y_int) / 100, abs(y_int) % 100);
             UART_SendString(buffer);
 
             // Format and send Z value
-            sprintf(buffer, "Z: %d.%02d g\r\n", z_int/100, abs(z_int%100));
+            sprintf(buffer, "Z: %s%d.%02d g\r\n", (z_int < 0 ? "-" : ""),
+                    abs(z_int) / 100, abs(z_int) % 100);
             UART_SendString(buffer);
 
             UART_SendString("\r\n");
