@@ -15,7 +15,7 @@
     }
   ],
   "license": "MIT",
-  "frameworks": "*",
-  "platforms": "*",
+  "frameworks": "ch32v003fun",
+  "platforms": "ch32v",
   "headers": "adxl345.h"
 }
