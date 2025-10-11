@@ -5,6 +5,15 @@ static float scale_factor = 0.004; // Default scale factor for ±2g
 
 // Initialize the ADXL345
 bool adxl345_init(void) {
+    // Reserve I2C pins to prevent GPIO library conflicts
+    if (reservePin(PC1, "ADXL345_I2C") != GPIO_OK) {
+        return false; // PC1 (SDA) already in use
+    }
+    if (reservePin(PC2, "ADXL345_I2C") != GPIO_OK) {
+        releasePin(PC1); // Clean up PC1 reservation
+        return false; // PC2 (SCL) already in use  
+    }
+    
     // Initialize I2C first
     RCC->APB1PCENR |= RCC_APB1Periph_I2C1;
     RCC->APB2PCENR |= RCC_APB2Periph_GPIOC;
@@ -90,6 +99,20 @@ void adxl345_powerDown(void) {
 // Power up the device
 void adxl345_powerUp(void) {
     i2c_write(ADXL345_ADDR, POWER_CTL_REG, 0x08);
+}
+
+// Deinitialize and release pins
+void adxl345_deinit(void) {
+    // Power down the device
+    adxl345_powerDown();
+    
+    // Release reserved pins
+    releasePin(PC1);
+    releasePin(PC2);
+    
+    // Disable I2C peripheral
+    I2C1->CTLR1 &= ~I2C_CTLR1_PE;
+    RCC->APB1PCENR &= ~RCC_APB1Periph_I2C1;
 }
 // Add these implementations to adxl345.c
 

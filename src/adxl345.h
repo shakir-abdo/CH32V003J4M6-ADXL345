@@ -5,6 +5,7 @@
 #include <stdint.h>
 
 #include "ch32v003fun.h"
+#include "gpios.h"  // Include GPIO library for pin reservation
 
 // ADXL345 Registers
 #define ADXL345_ADDR 0x53     // Device address when ALT ADDRESS pin is grounded
@@ -58,6 +59,7 @@ bool adxl345_readRaw(int16_t* x, int16_t* y, int16_t* z);
 bool adxl345_selfTest(void);
 void adxl345_powerDown(void);
 void adxl345_powerUp(void);
+void adxl345_deinit(void);  // Release reserved pins
 bool i2c_write(uint8_t addr, uint8_t reg, uint8_t data);
 bool i2c_read_multi(uint8_t addr, uint8_t reg, uint8_t* data, uint8_t len);
 #endif  // ADXL345_H
